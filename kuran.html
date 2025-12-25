@@ -1,0 +1,798 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Құран Кәрім - Қазақша</title>
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cormorant+Garamond:wght@400;500;600;700&family=Lora:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        :root {
+            --color-bg-main: #f8f7f4;
+            --color-bg-card: #ffffff;
+            --color-accent-primary: #c49a3a;
+            --color-accent-secondary: #8b6f47;
+            --color-text-primary: #2c2416;
+            --color-text-secondary: #6b5d4f;
+            --color-border: #e4dfd6;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Lora', serif;
+            background: var(--color-bg-main);
+            color: var(--color-text-primary);
+            line-height: 1.8;
+            overflow-x: hidden;
+        }
+
+        .bg-pattern {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(196, 154, 58, 0.04) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(139, 111, 71, 0.04) 0%, transparent 50%),
+                repeating-linear-gradient(45deg, transparent, transparent 100px, rgba(196, 154, 58, 0.02) 100px, rgba(196, 154, 58, 0.02) 102px);
+            z-index: -1;
+            animation: subtleShift 60s ease-in-out infinite;
+        }
+
+        @keyframes subtleShift {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            50% { transform: translate(10px, -10px) rotate(0.5deg); }
+        }
+
+        .header {
+            text-align: center;
+            padding: 4rem 2rem 3rem;
+            background: linear-gradient(180deg, rgba(196, 154, 58, 0.12) 0%, transparent 100%);
+            border-bottom: 2px solid var(--color-border);
+            position: relative;
+            animation: fadeInDown 1s ease-out;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .header h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: var(--color-accent-primary);
+            margin-bottom: 0.5rem;
+            letter-spacing: 0.02em;
+            text-shadow: 0 2px 15px rgba(196, 154, 58, 0.2);
+        }
+
+        .header .subtitle {
+            font-size: 1.1rem;
+            color: var(--color-text-secondary);
+            font-weight: 500;
+            letter-spacing: 0.05em;
+        }
+
+        .controls {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            animation: fadeIn 1.2s ease-out 0.3s both;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .controls select,
+        .controls button {
+            padding: 0.75rem 1.5rem;
+            background: var(--color-bg-card);
+            border: 2px solid var(--color-border);
+            color: var(--color-text-primary);
+            font-family: 'Lora', serif;
+            font-size: 1rem;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        .controls select:hover,
+        .controls button:hover {
+            border-color: var(--color-accent-primary);
+            background: rgba(196, 154, 58, 0.08);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        .controls select:focus,
+        .controls button:focus {
+            outline: none;
+            border-color: var(--color-accent-primary);
+            box-shadow: 0 0 0 3px rgba(196, 154, 58, 0.15);
+        }
+
+        .controls button:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .controls button:disabled:hover {
+            border-color: var(--color-border);
+            background: var(--color-bg-card);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        .toggle-view {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem 1.5rem;
+            background: var(--color-bg-card);
+            border: 2px solid var(--color-border);
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        .toggle-view:hover {
+            border-color: var(--color-accent-primary);
+            background: rgba(196, 154, 58, 0.08);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        .toggle-view label {
+            cursor: pointer;
+            font-size: 0.95rem;
+            user-select: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--color-text-primary);
+        }
+
+        .toggle-view input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+            accent-color: var(--color-accent-primary);
+        }
+
+        .loading {
+            text-align: center;
+            padding: 4rem 2rem;
+            font-size: 1.2rem;
+            color: var(--color-text-secondary);
+        }
+
+        .spinner {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            border: 3px solid var(--color-border);
+            border-top-color: var(--color-accent-primary);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-bottom: 1rem;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .surah-info {
+            max-width: 1200px;
+            margin: 2rem auto 3rem;
+            padding: 2.5rem;
+            background: var(--color-bg-card);
+            border: 2px solid var(--color-border);
+            border-radius: 16px;
+            text-align: center;
+            animation: fadeInUp 1s ease-out 0.5s both;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .surah-info h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.5rem;
+            color: var(--color-accent-primary);
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .surah-info .meta {
+            color: var(--color-text-secondary);
+            font-size: 1rem;
+            letter-spacing: 0.03em;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .ayah-container {
+            max-width: 1200px;
+            margin: 0 auto 4rem;
+            padding: 0 2rem;
+        }
+
+        .ayah-card {
+            background: var(--color-bg-card);
+            border: 2px solid var(--color-border);
+            border-radius: 16px;
+            padding: 3rem;
+            margin-bottom: 2rem;
+            position: relative;
+            transition: all 0.4s ease;
+            animation: fadeInUp 0.8s ease-out both;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+        }
+
+        .ayah-card:hover {
+            border-color: var(--color-accent-secondary);
+            box-shadow: 0 8px 24px rgba(196, 154, 58, 0.15);
+            transform: translateY(-4px);
+        }
+
+        .ayah-number {
+            position: absolute;
+            top: -15px;
+            left: 2rem;
+            background: var(--color-accent-primary);
+            color: #ffffff;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.1rem;
+            box-shadow: 0 4px 15px rgba(196, 154, 58, 0.3);
+        }
+
+        .arabic-text {
+            font-family: 'Amiri', serif;
+            font-size: 2.2rem;
+            line-height: 2.4;
+            text-align: right;
+            direction: rtl;
+            color: var(--color-text-primary);
+            margin-bottom: 2.5rem;
+            padding: 2rem;
+            background: rgba(196, 154, 58, 0.06);
+            border-radius: 12px;
+            border-right: 4px solid var(--color-accent-primary);
+            font-weight: 400;
+        }
+
+        .section-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1rem;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--color-accent-secondary);
+            margin-bottom: 1rem;
+        }
+
+        .section-label i {
+            font-size: 1.2rem;
+            color: var(--color-accent-primary);
+        }
+
+        .transliteration-text {
+            font-size: 1.15rem;
+            line-height: 2;
+            color: var(--color-text-secondary);
+            margin-bottom: 2rem;
+            font-style: italic;
+            padding: 1.5rem;
+            background: rgba(139, 111, 71, 0.08);
+            border-radius: 8px;
+            border-left: 3px solid var(--color-accent-secondary);
+        }
+
+        .translation-text {
+            font-size: 1.2rem;
+            line-height: 2.2;
+            color: var(--color-text-primary);
+            padding: 1.5rem;
+            background: linear-gradient(135deg, rgba(196, 154, 58, 0.05) 0%, rgba(139, 111, 71, 0.05) 100%);
+            border-radius: 12px;
+            border-left: 4px solid var(--color-accent-primary);
+        }
+
+        .bismillah {
+            text-align: center;
+            margin: 3rem auto;
+            padding: 2.5rem;
+            max-width: 1200px;
+            animation: fadeIn 1.5s ease-out;
+            background: var(--color-bg-card);
+            border: 2px solid var(--color-border);
+            border-radius: 12px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+        }
+
+        .bismillah .arabic-text {
+            font-size: 2.8rem;
+            border: none;
+            background: transparent;
+            text-align: center;
+            direction: rtl;
+            margin-bottom: 1.5rem;
+            padding: 1rem;
+        }
+
+        .bismillah .translation-text {
+            font-size: 1.1rem;
+            text-align: center;
+            background: rgba(196, 154, 58, 0.08);
+            border: 1px solid var(--color-border);
+            border-left: 1px solid var(--color-border);
+        }
+
+        .continuous-view {
+            background: var(--color-bg-card);
+            border: 2px solid var(--color-border);
+            border-radius: 16px;
+            padding: 3rem;
+            margin-bottom: 2rem;
+            animation: fadeInUp 0.8s ease-out both;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+        }
+
+        .continuous-view .arabic-full {
+            font-family: 'Amiri', serif;
+            font-size: 1.8rem;
+            line-height: 2.2;
+            text-align: right;
+            direction: rtl;
+            color: var(--color-text-primary);
+            padding: 2rem;
+            background: rgba(196, 154, 58, 0.06);
+            border-radius: 12px;
+            border-right: 4px solid var(--color-accent-primary);
+            margin-bottom: 3rem;
+        }
+
+        .continuous-view .transliteration-full {
+            font-size: 1.05rem;
+            line-height: 1.9;
+            color: var(--color-text-secondary);
+            font-style: italic;
+            padding: 2rem;
+            background: rgba(139, 111, 71, 0.08);
+            border-radius: 12px;
+            border-left: 3px solid var(--color-accent-secondary);
+            margin-bottom: 3rem;
+        }
+
+        .continuous-view .translation-full {
+            font-size: 1.15rem;
+            line-height: 2;
+            color: var(--color-text-primary);
+            padding: 2rem;
+            background: linear-gradient(135deg, rgba(196, 154, 58, 0.05) 0%, rgba(139, 111, 71, 0.05) 100%);
+            border-radius: 12px;
+            border-left: 4px solid var(--color-accent-primary);
+        }
+
+        .footer {
+            text-align: center;
+            padding: 3rem 2rem;
+            margin-top: 4rem;
+            border-top: 2px solid var(--color-border);
+            color: var(--color-text-secondary);
+            font-size: 0.95rem;
+        }
+
+        .footer i {
+            color: var(--color-accent-primary);
+            margin: 0 0.25rem;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2.5rem;
+            }
+            
+            .ayah-card, .continuous-view {
+                padding: 2rem 1.5rem;
+            }
+            
+            .arabic-text, .arabic-full {
+                font-size: 1.8rem;
+                line-height: 2.2;
+                padding: 1.5rem;
+            }
+            
+            .transliteration-text, .translation-text,
+            .transliteration-full, .translation-full {
+                font-size: 1rem;
+                padding: 1.25rem;
+                line-height: 1.8;
+            }
+
+            .controls {
+                flex-direction: column;
+                width: 100%;
+            }
+
+            .controls select,
+            .controls button,
+            .toggle-view {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .surah-info .meta {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+        }
+
+        .ayah-card:nth-child(1) { animation-delay: 0.1s; }
+        .ayah-card:nth-child(2) { animation-delay: 0.15s; }
+        .ayah-card:nth-child(3) { animation-delay: 0.2s; }
+        .ayah-card:nth-child(4) { animation-delay: 0.25s; }
+        .ayah-card:nth-child(5) { animation-delay: 0.3s; }
+    </style>
+</head>
+<body>
+    <div class="bg-pattern"></div>
+    
+    <header class="header">
+        <h1>القرآن الكريم</h1>
+        <p class="subtitle">ҚҰРАН КӘРІМ</p>
+    </header>
+
+    <div class="controls">
+        <select id="surahSelect">
+            <option value="">Сүрені таңдаңыз...</option>
+        </select>
+        <button id="prevBtn" disabled>
+            <i class="fas fa-chevron-left"></i>
+            Алдыңғы
+        </button>
+        <button id="nextBtn" disabled>
+            Келесі
+            <i class="fas fa-chevron-right"></i>
+        </button>
+        <div class="toggle-view">
+            <input type="checkbox" id="continuousView">
+            <label for="continuousView">
+                <i class="fas fa-list"></i>
+                Бірізді көрініс
+            </label>
+        </div>
+    </div>
+
+    <div id="content">
+        <div class="loading">
+            <div class="spinner"></div>
+            <p>Жүктелуде...</p>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <p><i class="fas fa-book-open"></i> Аударма: Халифа Алтай <i class="fas fa-circle" style="font-size: 0.3rem; vertical-align: middle;"></i> Дереккөз: quranenc.com & alquran.cloud</p>
+        <p style="margin-top: 0.5rem; font-size: 0.85rem;">Қазақша аударма Rowwad Translation Center қадағалауымен дайындалған</p>
+    </footer>
+
+    <script>
+        const surahNames = {
+            1: "Әл-Фатиха", 2: "Әл-Бақара", 3: "Әли Ғимран", 4: "Ән-Ниса", 5: "Әл-Мәида",
+            6: "Әл-Әнғам", 7: "Әл-Ағраф", 8: "Әл-Әнфәл", 9: "Әт-Тәуба", 10: "Юнус",
+            11: "Һуд", 12: "Юсуф", 13: "Әр-Рағд", 14: "Ибраһим", 15: "Әл-Хижр",
+            16: "Ән-Нахл", 17: "Әл-Исра", 18: "Әл-Кәһф", 19: "Мәрйәм", 20: "Та Һа",
+            21: "Әл-Әнбия", 22: "Әл-Хаж", 23: "Әл-Муъминун", 24: "Ән-Нур", 25: "Әл-Фурқан",
+            26: "Әш-Шуғара", 27: "Ән-Нәмл", 28: "Әл-Қасас", 29: "Әл-Ғанкәбут", 30: "Әр-Рум",
+            31: "Луқман", 32: "Әс-Сәжда", 33: "Әл-Ахзаб", 34: "Сәба", 35: "Фатир",
+            36: "Йа Син", 37: "Әс-Саффат", 38: "Сад", 39: "Әз-Зумәр", 40: "Ғафир",
+            41: "Фуссилат", 42: "Әш-Шура", 43: "Әз-Зұхруф", 44: "Әд-Духан", 45: "Әл-Жасия",
+            46: "Әл-Ахқаф", 47: "Мұхаммад", 48: "Әл-Фатх", 49: "Әл-Хұжұрат", 50: "Қаф",
+            51: "Әз-Зарият", 52: "Әт-Тұр", 53: "Ән-Нәжм", 54: "Әл-Қамар", 55: "Әр-Рахман",
+            56: "Әл-Уақиға", 57: "Әл-Хадид", 58: "Әл-Мұжадала", 59: "Әл-Хашр", 60: "Әл-Мұмтахана",
+            61: "Әс-Сафф", 62: "Әл-Жұмуға", 63: "Әл-Мұнафиқун", 64: "Әт-Тағабун", 65: "Әт-Талақ",
+            66: "Әт-Тахрим", 67: "Әл-Мұлк", 68: "Әл-Қалам", 69: "Әл-Хаққа", 70: "Әл-Мағариж",
+            71: "Нұх", 72: "Әл-Жин", 73: "Әл-Музаммил", 74: "Әл-Муддәссир", 75: "Әл-Қияма",
+            76: "Әл-Инсан", 77: "Әл-Мұрсалат", 78: "Ән-Нәба", 79: "Ән-Назиғат", 80: "Ғабаса",
+            81: "Әт-Тәкуир", 82: "Әл-Инфитар", 83: "Әл-Мұтаффифин", 84: "Әл-Иншиқақ", 85: "Әл-Бұрұж",
+            86: "Әт-Тариқ", 87: "Әл-Ағла", 88: "Әл-Ғашия", 89: "Әл-Фажр", 90: "Әл-Баляд",
+            91: "Әш-Шәмс", 92: "Әл-Ләйл", 93: "Әд-Духа", 94: "Әш-Шәрх", 95: "Әт-Тин",
+            96: "Әл-Ғаләқ", 97: "Әл-Қадр", 98: "Әл-Баййина", 99: "Әз-Залзаля", 100: "Әл-Ғадият",
+            101: "Әл-Қариға", 102: "Әт-Такасур", 103: "Әл-Ғаср", 104: "Әл-Һумаза", 105: "Әл-Фил",
+            106: "Құрайш", 107: "Әл-Мағун", 108: "Әл-Кәусәр", 109: "Әл-Кәфирун", 110: "Ән-Наср",
+            111: "Әл-Мәсәд", 112: "Әл-Ихлас", 113: "Әл-Фәләқ", 114: "Ән-Нас"
+        };
+
+        const ayahCounts = {
+            1: 7, 2: 286, 3: 200, 4: 176, 5: 120, 6: 165, 7: 206, 8: 75, 9: 129, 10: 109,
+            11: 123, 12: 111, 13: 43, 14: 52, 15: 99, 16: 128, 17: 111, 18: 110, 19: 98, 20: 135,
+            21: 112, 22: 78, 23: 118, 24: 64, 25: 77, 26: 227, 27: 93, 28: 88, 29: 69, 30: 60,
+            31: 34, 32: 30, 33: 73, 34: 54, 35: 45, 36: 83, 37: 182, 38: 88, 39: 75, 40: 85,
+            41: 54, 42: 53, 43: 89, 44: 59, 45: 37, 46: 35, 47: 38, 48: 29, 49: 18, 50: 45,
+            51: 60, 52: 49, 53: 62, 54: 55, 55: 78, 56: 96, 57: 29, 58: 22, 59: 24, 60: 13,
+            61: 14, 62: 11, 63: 11, 64: 18, 65: 12, 66: 12, 67: 30, 68: 52, 69: 52, 70: 44,
+            71: 28, 72: 28, 73: 20, 74: 56, 75: 40, 76: 31, 77: 50, 78: 40, 79: 46, 80: 42,
+            81: 29, 82: 19, 83: 36, 84: 25, 85: 22, 86: 17, 87: 19, 88: 26, 89: 30, 90: 20,
+            91: 15, 92: 21, 93: 11, 94: 8, 95: 8, 96: 19, 97: 5, 98: 8, 99: 8, 100: 11,
+            101: 11, 102: 8, 103: 3, 104: 9, 105: 5, 106: 4, 107: 7, 108: 3, 109: 6, 110: 3,
+            111: 5, 112: 4, 113: 5, 114: 6
+        };
+
+        let currentSurah = 1;
+
+        const surahSelect = document.getElementById('surahSelect');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const contentDiv = document.getElementById('content');
+        const continuousViewCheckbox = document.getElementById('continuousView');
+
+        for (let i = 1; i <= 114; i++) {
+            const option = document.createElement('option');
+            option.value = i;
+            option.textContent = i + '. ' + surahNames[i];
+            surahSelect.appendChild(option);
+        }
+
+        surahSelect.addEventListener('change', function(e) {
+            const surahNum = parseInt(e.target.value);
+            if (surahNum) {
+                currentSurah = surahNum;
+                loadSurah(surahNum);
+            }
+        });
+
+        prevBtn.addEventListener('click', function() {
+            if (currentSurah > 1) {
+                currentSurah--;
+                surahSelect.value = currentSurah;
+                loadSurah(currentSurah);
+            }
+        });
+
+        nextBtn.addEventListener('click', function() {
+            if (currentSurah < 114) {
+                currentSurah++;
+                surahSelect.value = currentSurah;
+                loadSurah(currentSurah);
+            }
+        });
+
+        continuousViewCheckbox.addEventListener('change', function() {
+            if (currentSurah) {
+                loadSurah(currentSurah);
+            }
+        });
+
+        function latinToCyrillic(latin) {
+            if (!latin) return '';
+            
+            let result = latin.toLowerCase();
+            
+            const multiChar = {
+                'aa': 'аа',
+                'ee': 'ии',
+                'oo': 'уу',
+                'uu': 'уу',
+                'gh': 'ғ',
+                'kh': 'х',
+                'sh': 'ш',
+                'th': 'с',
+                'dh': 'з',
+                'zh': 'ж'
+            };
+            
+            for (let lat in multiChar) {
+                result = result.replace(new RegExp(lat, 'g'), multiChar[lat]);
+            }
+            
+            const singleChar = {
+                'a': 'а',
+                'b': 'б',
+                'd': 'д',
+                'e': 'е',
+                'f': 'ф',
+                'g': 'г',
+                'h': 'һ',
+                'i': 'и',
+                'j': 'ж',
+                'k': 'к',
+                'l': 'л',
+                'm': 'м',
+                'n': 'н',
+                'o': 'о',
+                'p': 'п',
+                'q': 'қ',
+                'r': 'р',
+                's': 'с',
+                't': 'т',
+                'u': 'у',
+                'v': 'в',
+                'w': 'у',
+                'y': 'й',
+                'z': 'з'
+            };
+            
+            for (let lat in singleChar) {
+                result = result.replace(new RegExp(lat, 'g'), singleChar[lat]);
+            }
+            
+            return result;
+        }
+
+        async function loadSurah(surahNum) {
+            contentDiv.innerHTML = '<div class="loading"><div class="spinner"></div><p>Жүктелуде...</p></div>';
+            
+            prevBtn.disabled = surahNum === 1;
+            nextBtn.disabled = surahNum === 114;
+
+            try {
+                const kazakhResp = await fetch('https://quranenc.com/api/v1/translation/sura/kazakh_altai/' + surahNum);
+                const arabicResp = await fetch('https://api.alquran.cloud/v1/surah/' + surahNum);
+                const transResp = await fetch('https://api.alquran.cloud/v1/surah/' + surahNum + '/en.transliteration');
+
+                const kazakhData = await kazakhResp.json();
+                const arabicData = await arabicResp.json();
+                const transData = await transResp.json();
+
+                const isContinuous = continuousViewCheckbox.checked;
+                
+                if (isContinuous) {
+                    displaySurahContinuous(surahNum, kazakhData.result, arabicData.data, transData.data);
+                } else {
+                    displaySurahByAyah(surahNum, kazakhData.result, arabicData.data, transData.data);
+                }
+            } catch (error) {
+                contentDiv.innerHTML = '<div class="loading"><p style="color: #c1392b;"><i class="fas fa-exclamation-triangle"></i> Қате орын алды. Қайталап көріңіз.</p></div>';
+                console.error('Error:', error);
+            }
+        }
+
+        function displaySurahByAyah(surahNum, kazakhAyahs, arabicSurah, transSurah) {
+            const surahName = surahNames[surahNum];
+            const ayahCount = ayahCounts[surahNum];
+            
+            let html = '<div class="surah-info">';
+            html += '<h2>' + surahName + '</h2>';
+            html += '<div class="meta">';
+            html += '<span class="meta-item"><i class="fas fa-book-quran"></i> ' + surahNum + '-сүре</span>';
+            html += '<span class="meta-item"><i class="fas fa-list-ol"></i> ' + ayahCount + ' аят</span>';
+            html += '</div></div>';
+
+            if (surahNum !== 1 && surahNum !== 9) {
+                const bismillah = 'بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ';
+                html += '<div class="bismillah">';
+                html += '<div class="arabic-text">' + bismillah + '</div>';
+                html += '<div class="translation-text">Аса қамқор, ерекше мейірімді Алланың атымен бастаймын</div>';
+                html += '</div>';
+            }
+
+            html += '<div class="ayah-container">';
+
+            for (let i = 0; i < kazakhAyahs.length; i++) {
+                const kazakhAyah = kazakhAyahs[i];
+                const arabicAyah = arabicSurah.ayahs[i];
+                const transAyah = transSurah.ayahs[i];
+                const ayahNumber = kazakhAyah.aya;
+                const arabicText = arabicAyah.text;
+                const transliteration = latinToCyrillic(transAyah.text);
+                const kazakhTranslation = kazakhAyah.translation;
+
+                html += '<div class="ayah-card">';
+                html += '<div class="ayah-number">' + ayahNumber + '</div>';
+                html += '<div class="arabic-text">' + arabicText + '</div>';
+                html += '<div class="section-label"><i class="fas fa-volume-up"></i> Транскрипция</div>';
+                html += '<div class="transliteration-text">' + transliteration + '</div>';
+                html += '<div class="section-label"><i class="fas fa-language"></i> Қазақша мағынасы</div>';
+                html += '<div class="translation-text">' + kazakhTranslation + '</div>';
+                html += '</div>';
+            }
+
+            html += '</div>';
+            contentDiv.innerHTML = html;
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function displaySurahContinuous(surahNum, kazakhAyahs, arabicSurah, transSurah) {
+            const surahName = surahNames[surahNum];
+            const ayahCount = ayahCounts[surahNum];
+            
+            let html = '<div class="surah-info">';
+            html += '<h2>' + surahName + '</h2>';
+            html += '<div class="meta">';
+            html += '<span class="meta-item"><i class="fas fa-book-quran"></i> ' + surahNum + '-сүре</span>';
+            html += '<span class="meta-item"><i class="fas fa-list-ol"></i> ' + ayahCount + ' аят</span>';
+            html += '</div></div>';
+
+            let fullArabic = '';
+            let fullTranslit = '';
+            let fullTranslation = '';
+
+            if (surahNum !== 1 && surahNum !== 9) {
+                const bismillah = 'بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ';
+                html += '<div class="bismillah">';
+                html += '<div class="arabic-text">' + bismillah + '</div>';
+                html += '<div class="translation-text">Аса қамқор, ерекше мейірімді Алланың атымен бастаймын</div>';
+                html += '</div>';
+            }
+
+            for (let i = 0; i < kazakhAyahs.length; i++) {
+                const kazakhAyah = kazakhAyahs[i];
+                const arabicAyah = arabicSurah.ayahs[i];
+                const transAyah = transSurah.ayahs[i];
+                
+                fullArabic += arabicAyah.text + ' ۝<br>';
+                fullTranslit += latinToCyrillic(transAyah.text) + ' ۝<br>';
+                fullTranslation += kazakhAyah.translation + '<br>';
+            }
+
+            html += '<div class="continuous-view">';
+            html += '<div class="section-label"><i class="fas fa-book-quran"></i> Арабша мәтін</div>';
+            html += '<div class="arabic-full">' + fullArabic + '</div>';
+            html += '<div class="section-label"><i class="fas fa-volume-up"></i> Транскрипция</div>';
+            html += '<div class="transliteration-full">' + fullTranslit + '</div>';
+            html += '<div class="section-label"><i class="fas fa-language"></i> Қазақша мағынасы</div>';
+            html += '<div class="translation-full">' + fullTranslation + '</div>';
+            html += '</div>';
+
+            contentDiv.innerHTML = html;
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        loadSurah(1);
+        surahSelect.value = 1;
+    </script>
+</body>
+</html>
